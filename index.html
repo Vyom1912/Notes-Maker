@@ -5,34 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="icone.png" />
     <title>PatelKeeps</title>
-    <script
-      src="https://kit.fontawesome.com/dd0de70807.js"
-      crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="heading">
+    <header class="heading">
       <h1><i class="fa-solid fa-note-sticky"></i> PatelKeeps</h1>
-    </div>
+    </header>
 
-    <div class="btn-div">
-      <button class="learn-more" class="add" id="add">
-        <span class="circle" aria-hidden="true">
-          <span class="icon arrow"></span>
-        </span>
-        <span class="button-text">Add note</span>
-      </button>
-    </div>
+    <div class="container">
+      <div class="toolbar">
+        <label class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="search"
+            id="search"
+            placeholder="Search notes..."
+            aria-label="Search notes" />
+        </label>
 
-    <div class="note">
-      <div class="tools">
-        <button class="edit"><i class="fas fa-edit"></i></button>
-        <button class="delete"><i class="fas fa-trash-alt"> </i></button>
+        <button class="learn-more" id="add" type="button">
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+          <span class="button-text">Add note</span>
+        </button>
       </div>
 
-      <div class="main"></div>
-      <textarea class=""></textarea>
+      <p class="empty" id="empty" hidden></p>
+      <main class="note-container" id="notes"></main>
     </div>
+
+    <footer class="footer">
+      <p>
+        &copy; 2025 PatelKeeps. Designed and developed by Vyom Patel. All
+        rights reserved.
+      </p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

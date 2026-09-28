@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap");
 
 * {
   margin: 0;
@@ -11,51 +11,87 @@
   --gray: #393e46;
   --teal: #00adb5;
   --bg-color: #eeeeee;
+  --green: #2ecc71;
+  --red: #e74c3c;
+  --ease: cubic-bezier(0.65, 0, 0.076, 1);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 html {
   -webkit-tap-highlight-color: transparent;
 }
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-wrap: wrap;
 }
+
+/* ---------------- header ---------------- */
+
 .heading {
-  width: 100vw;
+  width: 100%;
   height: 5.5rem;
   background-color: var(--black);
-  color: #282936;
   box-shadow: 0px 5px 16px var(--gray);
 }
 
 .heading h1 {
-  line-height: 5.8rem;
+  line-height: 5.5rem;
   margin-left: 2rem;
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 0.9px;
   word-spacing: 2px;
   color: var(--teal);
-  /* text-shadow: rgb(0, 0, 0) -1px 1px 1px, rgb(0, 0, 0) 1px 1px 1px,
-    rgb(0, 0, 0) 1px -1px 1px, rgb(0, 0, 0) -1px -1px 1px; */
 }
 
-.add:active {
-  transform: scale(0.98);
+.container {
+  flex: 1;
+  width: 100%;
+  padding: 2rem;
+}
+
+/* ---------------- toolbar ---------------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fff;
+  color: var(--gray);
+  border: 2px solid transparent;
+  border-radius: 1.625rem;
+  padding: 0 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-box:focus-within {
+  border-color: var(--teal);
+  box-shadow: 0 4px 14px rgba(0, 173, 181, 0.25);
+}
+
+.search-box input {
+  width: 16rem;
+  border: none;
+  background: transparent;
+  color: var(--black);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.75rem 0;
 }
 
 /* button style start */
-
-.btn-div {
-  position: fixed;
-  top: 7rem;
-  right: 1rem;
-  border: none;
-  border-radius: 3px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
 
 button {
   position: relative;
@@ -75,8 +111,11 @@ button.learn-more {
   width: 12rem;
   height: auto;
 }
+button.learn-more:active {
+  transform: scale(0.98);
+}
 button.learn-more .circle {
-  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  transition: all 0.45s var(--ease);
   position: relative;
   display: block;
   margin: 0;
@@ -86,15 +125,14 @@ button.learn-more .circle {
   border-radius: 1.625rem;
 }
 button.learn-more .circle .icon {
-  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  transition: all 0.45s var(--ease);
   position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
-  /* background: #fff; */
 }
 button.learn-more .circle .icon.arrow {
-  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  transition: all 0.45s var(--ease);
   left: 0.625rem;
   width: 1.125rem;
   height: 0.125rem;
@@ -112,7 +150,7 @@ button.learn-more .circle .icon.arrow::before {
   transform: rotate(45deg);
 }
 button.learn-more .button-text {
-  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  transition: all 0.45s var(--ease);
   position: absolute;
   top: 0;
   left: 0;
@@ -124,94 +162,273 @@ button.learn-more .button-text {
   font-weight: 700;
   line-height: 1.6;
   text-align: center;
-  vertical-align: middle;
   text-transform: uppercase;
 }
 
-button:hover .circle {
+button.learn-more:hover .circle,
+button.learn-more:focus-visible .circle {
   width: 100%;
 }
-
-button:hover .circle .icon.arrow {
+button.learn-more:hover .circle .icon.arrow,
+button.learn-more:focus-visible .circle .icon.arrow {
   background: var(--bg-color);
   transform: translate(1rem, 0);
 }
-
-button:hover .button-text {
+button.learn-more:hover .button-text,
+button.learn-more:focus-visible .button-text {
   color: var(--bg-color);
 }
 
-/* button style end*/
+/* button style end */
+
+/* ---------------- notes grid ---------------- */
+
+.note-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.empty {
+  text-align: center;
+  color: var(--gray);
+  font-size: 1.05rem;
+  padding: 3rem 0;
+  animation: fade-in 0.4s ease;
+}
 
 .note {
+  display: flex;
+  flex-direction: column;
   background-color: var(--teal);
-  margin: 30px 20px;
-  height: 200px;
-  width: 400px;
-  overflow-y: scroll;
-  margin-top: 7rem;
+  min-height: 200px;
+  padding-bottom: 1rem;
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
-    inset -1px 0 rgba(0, 0, 0, 0.1);
+    inset -1px 0 rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.12);
+  animation: pop-in 0.4s var(--ease-out);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
+
+.note:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+    inset -1px 0 rgba(0, 0, 0, 0.1), 0 12px 22px rgba(0, 0, 0, 0.2);
+}
+
+.note.editing {
+  box-shadow: 0 0 0 3px var(--black), 0 12px 22px rgba(0, 0, 0, 0.2);
+}
+
+.note.removing {
+  animation: pop-out 0.3s var(--ease-out) forwards;
+  pointer-events: none;
+}
+
+.note.filtered {
+  display: none;
+}
+
+/* ---------------- tools ---------------- */
 
 .note .tools {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem;
 }
 
-.note .tools button {
-  background-color: transparent;
-  border: none;
+.note .tools .date {
+  flex: 1;
+  padding-left: 0.3rem;
+  font-size: 0.75rem;
   color: var(--bg-color);
-  cursor: pointer;
-  font-size: 1rem;
-  margin-left: 0.5rem;
+  opacity: 0.85;
 }
 
-.note textarea {
-  outline: none;
-  font-family: inherit;
-  font-size: 1.2rem;
-  letter-spacing: 1.5px;
-  font-weight: 700 !important;
-  border: none;
-  height: 300px;
-  width: 100%;
-  padding: 0 10px;
-}
-.main {
-  font-size: 1.2rem;
-  letter-spacing: 1.5px;
-  font-weight: 700 !important;
-  color: var(--bg-color);
-  padding: 0 10px;
-}
-.fa-edit,
-.fa-trash-alt {
-  color: var(--bg-color);
-  padding: 10px;
-  background-color: #2ecc71;
+.note .tools button {
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
   border-radius: 50%;
+  color: var(--bg-color);
+  font-size: 1rem;
   transition: all 0.3s ease;
 }
 
-.fa-trash-alt {
-  background-color: #e74c3c;
+.note .tools .edit {
+  background-color: var(--green);
 }
 
-.fa-edit:hover {
+.note .tools .delete {
+  background-color: var(--red);
+}
+
+.note .tools .edit:hover {
   background-color: var(--bg-color);
   color: #27ae60;
   filter: drop-shadow(0px 10px 8px rgb(219, 218, 218));
 }
 
-.fa-trash-alt:hover {
+.note .tools .delete:hover {
   background-color: var(--bg-color);
-  color: #e74c3c;
+  color: var(--red);
   filter: drop-shadow(0px 10px 8px rgb(219, 218, 218));
 }
 
-.hidden {
+.note .tools button:focus-visible {
+  box-shadow: 0 0 0 2px var(--black);
+}
+
+/* ---------------- note content ---------------- */
+
+.main {
+  flex: 1;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: var(--bg-color);
+  padding: 0 10px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  cursor: text;
+  animation: fade-in 0.25s ease;
+}
+
+.main:empty::before {
+  content: "Empty note — click to write";
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.note textarea {
   display: none;
+  width: calc(100% - 1rem);
+  min-height: 140px;
+  margin: 0 0.5rem;
+  padding: 0.5rem 10px;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: var(--black);
+  background: #fff;
+}
+
+.note.editing .main {
+  display: none;
+}
+
+.note.editing textarea {
+  display: block;
+  animation: fade-in 0.25s ease;
+}
+
+/* ---------------- footer ---------------- */
+
+.footer {
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--gray);
+  padding: 1rem;
+}
+
+/* ---------------- animations ---------------- */
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop-out {
+  to {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* touch screens have no hover, so don't leave cards lifted after a tap */
+@media (hover: none) {
+  .note:hover {
+    transform: none;
+  }
+}
+
+/* ---------------- responsive ---------------- */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .search-box {
+    flex: 1;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    height: 4.5rem;
+  }
+
+  .heading h1 {
+    line-height: 4.5rem;
+    margin-left: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button.learn-more {
+    align-self: flex-end;
+  }
+
+  .note-container {
+    grid-template-columns: 1fr;
+  }
+
+  .note {
+    min-height: 160px;
+  }
+
+  .main,
+  .note textarea {
+    font-size: 1.05rem;
+  }
 }
